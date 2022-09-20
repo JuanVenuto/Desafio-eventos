@@ -1,0 +1,496 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+
+:root{
+    --color-blanco: #fff;
+    --verde: #7FB77E;
+    --beige: #FDEEDC;
+    --gris-claro: #CFD2CF;
+    --azul-muy-claro: #E1FFEE;
+    --buen-azul: #7FBCD2;
+    --azul-oscuro: #0F3460; 
+    --otro-azul-o-gris: #B7C4CF;
+    --verde-oscuro: #1C6758;
+    --negro-distinto: #181818;
+    --otro-azul: #364F6B;
+    --negro-sutil: #212121;
+
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+h1{
+    font-family: 'Bree Serif', serif;
+    position: relative;
+    z-index: 1;
+}
+h2{
+    font-family: 'DM Serif Display', serif;
+    position: relative;
+    z-index: 1;
+}
+.logo{
+    width: 10%;
+    height: 10%;
+}
+.logoHeader{
+    width: 3.125rem;
+    height: 2.5rem;
+}
+.navbar{
+    background-color: #11131b00;
+}
+.navbar .container-fluid .collapse .navbar-nav .nav-item a{ /*para las letras*/
+    color: black; 
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.0625rem;
+    transition: all 1s;
+}
+.header .collapse {
+    position: absolute;
+    right: 0;
+}
+#headerEmpresa .collapse {
+    position: absolute;
+    right: 0;
+}
+
+.header .collapse .navbar-nav .nav-item a:hover{
+    border-bottom: solid #0F3460 1px;
+}
+#headerEmpresa .collapse .navbar-nav .nav-item a:hover{
+    border-bottom: solid #0F3460 1px;
+}
+#headerEmpresa{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(#abbaab, #ffffff);
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url(./IMAGENES/nuevas/irr.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.header::before{
+    content: "";
+    width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(90deg, #092327, var(--color-blanco)); 
+    opacity: 0.5;
+}
+
+ul{
+    list-style-type: none; /*saca los puntos*/
+}
+.flex-menu{
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    position: absolute;
+    right: 0;
+    background-color: #092327;
+}
+
+.menu li a{
+    text-decoration: none;
+    color: var(--color-blanco);
+    font-weight: 400;
+    letter-spacing: 0.125rem;
+    display: flex;
+    justify-content: center;
+    padding-top: 0.3125rem;
+}
+.menu li a:hover{
+    background-color: var(--color-blanco);
+    border: solid #092327 0.0625rem;
+    color: #092327;
+}
+
+
+.titulos{
+    line-height: 350%;
+}
+.titulos h1{
+    text-align: center;
+    margin-top: 5%;
+}
+.titulos h2{
+    text-align: center;
+    font-size: 150%;
+}
+#borde{
+    width: 50%;
+    margin: auto;
+}
+
+
+.header .boton{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 0.9375rem 1.875rem;
+    width: 30%;
+    color: #092327;
+    letter-spacing: 4px; /*distancia entre letras*/
+    font-size: 20px;
+    text-decoration: none;
+    overflow: hidden; /*oculta los elementos que estan por fuera del boton*/
+    margin: auto;
+    transition: 0.2s;
+}
+
+.header .boton:hover{
+    box-shadow: 0 0 0.3125rem #fff, 0 0 1.25rem #fff, 0 0 2.5rem #fff;
+    background-color: var(--azul-oscuro);
+}
+.header .boton .btn:hover{
+    color: var(--verde-oscuro);
+}
+
+.container-empresa{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /*margin: auto;*/
+    margin-left: 40px;
+    flex-wrap: wrap;
+}
+.imagen-empresa{
+    width: 80%;
+    margin-left: 80px;
+}
+.pasos-empresa{
+    line-height: 200%;
+}
+.botonEmpresa a{
+    text-decoration: none;
+    color: var(--color-blanco);
+    font-weight: 600;
+}
+.botonEmpresa a:hover{
+    color: #fff;
+}
+.botonEmpresa{
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-left: 150px;
+    background-color: var(--buen-azul);
+    color: var(--color-blanco);
+}
+.botonEmpresa:hover{
+    background-color: #49a4c5;
+}
+.botonCurso{
+    margin: auto;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 30px;
+    background-color: var(--buen-azul);
+    color: var(--color-blanco);
+    z-index: 1;
+}
+.botonCurso:hover{
+    background-color: #49a4c5;
+}
+.botonCurso a{
+    text-decoration: none;
+    color: var(--color-blanco);
+    font-weight: 600;
+}
+.botonCurso a:hover{
+    color: #fff;
+}
+#headerCurso{
+    background-image: url(./IMAGENES/nuevas/curso2.png),
+    url(./IMAGENES/nuevas/curso.jpg);
+    background-size: 20%, cover;
+    background-position: bottom right, 0 0;
+    z-index: 1;
+}
+
+.nosotros{
+    background-color: var(--gris-claro);
+    padding: 4.375rem;
+}
+.nosotros h3{
+    font-size: 200%;
+    font-weight: 900;
+    font-family: 'DM Serif Display', serif;
+}
+.nosotros p{
+    text-align: center;
+}
+
+/*Cartas*/
+
+.container-card{
+    max-width: 75rem;
+    margin: auto;
+    margin-top: 3.125rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.cardi{
+    width: 18.75rem;
+    margin: 0.625rem;
+    transition: all 300ms;
+}
+.cardi .cover{
+    position: relative;
+    width: 100%;
+    height: 15.625rem;
+    overflow: hidden;
+}
+.cardi .cover img{
+    width: 12.5rem;
+    position: relative; /*para que se ponga por encima*/
+    z-index: 1; /*se posiciona arriba*/
+    display: block; /*con este y el de abajo las centramos*/
+    margin: auto;
+    top: 1.875rem;
+    transition: all 400ms;
+    filter: drop-shadow(0.3125rem 0.3125rem 0.25rem rgba(0,0,0,0.5));
+}
+.cardi .cover .img_back{
+    width: 100%;
+    height: 15.625rem;
+    position: absolute;
+    bottom: -5rem;
+    left: 0;
+    background-size: cover;
+    border-radius: 1.25rem;
+    transition: all 300ms;
+}
+.cardi:nth-of-type(1) .img_back{
+    background-image: url(./IMAGENES/nuevas/bg1.jpg);
+} /*asi vinculamos las imagenes de fondo con las card*/
+.cardi:nth-of-type(2) .img_back{
+    background-image: url(./IMAGENES/nuevas/bg2.jpg);
+}
+.cardi .descripcion{
+    background-color: var(--azul-muy-claro);
+    margin-top: -0.625rem;
+    padding: 1.25rem;
+    border-radius: 0rem 0rem 1.25rem 1.25rem;
+}
+.cardi .descripcion h2{
+    margin-top: 0.625rem;
+}
+.cardi .descripcion p{
+    margin-top: 0.625rem;
+}
+
+.cardi .descripcion input{
+    padding: 0.625rem 2.5rem;
+    margin-top: 1.25rem;
+    border: none;
+    background: #7a7a7a;
+    color: #fff;
+    font-size: 0.875rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: all 300ms;
+}
+
+.cardi .descripcion input:hover{
+    background-color: #343434;
+}
+
+.cardi:hover{
+    width: 21.875rem;
+}
+.cardi:hover .cover img{
+    top: 0rem; /*vuelve a su posicion original*/    
+}
+.cardi:hover .cover .img_back{
+    bottom: -2.5rem;
+}
+.cardi:hover .descripcion{
+    padding: 2.5rem;
+}
+
+
+/*FOOTER*/
+
+footer{
+    width: 100%;
+    background-color: var(--gris-claro);
+}
+
+.container-footer{
+    display: flex;
+    flex-wrap: wrap; /*que se pongan una al lado de la otra cuando se achica la pantalla*/
+    justify-content: space-between;
+    margin: auto;
+    max-width: 75rem; /*tengan un ancho maximo y se adaptan a la pagina*/
+    margin-top: 3.125rem;
+}
+.box_footer{
+    display:flex;
+    flex-direction: column;
+    padding: 2.5rem;
+}
+.box_footer .logo img{
+    width: 21.875rem;
+}
+.box_footer .terminos{
+    max-width: 21.875rem;
+    margin-top: 3.75rem;
+    font-weight: 500;
+    font-family: 'Times New Roman', Times, serif;
+    color: #7a7a7a;
+    font-size: 1.125rem;
+}
+.box_footer h2{
+    margin-bottom: 1.875rem;
+    color: #343434;
+    font-weight: 700;
+}
+.box_footer a{
+    margin-top: 0.625rem;
+    color: #7a7a7a;
+    font-weight: 600;
+    text-decoration: none;
+}
+.box_footer a:hover{
+    opacity: 0.8;
+}
+.box_footer a .fab{
+    font-size: 1.25rem;
+}
+.box_footer i{
+    padding-right: 1.25rem;
+}
+
+
+/*CON JS*/
+
+
+
+#cursosDestacados{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    padding-bottom: 50px;
+}
+#cursosDestacados .card{
+    width: 100%;
+    max-height: 350px;
+    padding-bottom: 50px;
+    top: 10px;
+    transition: all 300ms;
+    margin-bottom: 50px;
+}
+#cursosDestacados .card:hover{
+    background-color: rgba(241, 238, 238, 0.24);
+    top: -10px;
+}
+#buscarEmpresa{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 0.9375rem 1.875rem;
+    width: 30%;
+    color: #092327;
+    letter-spacing: 4px; 
+    font-size: 20px;
+    text-decoration: none;
+    overflow: hidden;
+    margin: auto;
+}
+
+#buscarEmpresa .btn:hover{
+    color: var(--verde-oscuro);
+}
+
+/*FORM EMPRESAS*/
+
+#inputEmpresas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: column;
+}
+#inputEmpresas input{
+    max-width: 500px;
+    margin: auto;
+}
+#inputEmpresas div label{
+    font-weight: 600;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #0F3460;
+    padding-left: 20px;
+}
+.form-label{
+    text-align: center;
+}
+#inputEmpresas div{
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+#precioGlobal{
+    display: flex;
+    flex-direction: column;
+}
+#precio2{
+    display: flex;
+    flex-direction: row;
+}
+#nombre2{
+    display: flex;
+    flex-direction: row;
+}
+#contacto2{
+    display: flex;
+    flex-direction: row;
+}
+#botones{
+    margin: auto;
+}
+
+/*HACER TODO RESPONSIVE CON MEDIA QUERIES*/
+
+@media (max-width: 62.5625rem){
+    header .collapse{
+        position: relative;
+    }
+    .navbar .container-fluid .collapse .navbar-nav .nav-item a{
+        border: none;
+        border-radius: 0;
+        padding: 0.625rem 1.25rem;
+    }
+}
+@media (max-width: 48rem){
+    .boton .form-control{
+        display: none;
+    }
+    .boton .btn{
+        display: none;
+    }
+    .carousel{
+        display: none;
+    }
+    #carouselExampleDark{
+        display: none;
+    }
+}
+
+
+
