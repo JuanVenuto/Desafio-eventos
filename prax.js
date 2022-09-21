@@ -14,7 +14,7 @@ function Curso (nombre, precio, duracion, nombreProfesor, apellido, numero, mail
 }
 
 
-// Setup
+
 const curso1 = new Curso ("Marketing", 7000, "3 semanas", "Cristian", "Gonzales", 2235602627, "judjkfndl@gmail.com", 45648, 1)
 const curso2 = new Curso ("Ingles", 8000, "4 semanas", "Cristian", "Gonzales", 2235602627, "judjkfndl@gmail.com", 45648, 2)
 const curso3 = new Curso ("Community Manager", 6000, "2 semanas", "Cristian", "Gonzales", 2235602627, "judjkfndl@gmail.com", 45648, 3)
@@ -38,7 +38,7 @@ const arrayDeCursos = [curso1, curso2, curso3, curso4, curso5, curso6, curso7, c
 
 
 
-//INTERACTUAR CON HTML
+
 
 function crearProductos(){
     let productos = document.getElementById("cursosDestacados")
@@ -60,7 +60,7 @@ function crearProductos(){
 crearProductos()
 
 
-//EVENTOS EN EMPRESAS
+
 
 
 function guardarInfoInput (){ 
@@ -78,21 +78,14 @@ function guardarInfoInput (){
     crearProductos()
 }
 
-//BOTON GUARDAR
-
-let guardar = document.getElementById("guardar") //cada vez que haga click en guardar me crea el div
-guardar.addEventListener("click", ()=>{
-    guardarInfoInput()
-})
 
 
 
-//AGREGAR AL CARRITO DESDE CURSOS
+//CARRITO
 
 
-let carrito = document.getElementsByClassName("card-link") //esta clase esta en el innerHTML de la function crearProductos()
-const arrayDeCarrito = [] //cree un array para almacenar todos los que van a carrito
-
+let carrito = document.getElementsByClassName("card-link") 
+const arrayDeCarrito = [] 
 
 
 arrayDeCursos.forEach((e)=>{
@@ -103,6 +96,17 @@ arrayDeCursos.forEach((e)=>{
     })
 })
 
+
+
+//BOTON GUARDAR
+
+let guardar = document.getElementById("guardar") 
+
+if(guardar != null){
+    guardar.addEventListener("click", ()=>{
+        guardarInfoInput()
+    })
+}
 
 
 
