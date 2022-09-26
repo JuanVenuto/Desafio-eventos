@@ -112,27 +112,46 @@ if(guardar != null){
 
 //BUSCADOR: la idea seria filtrar por el nombre 
 
-const busqueda = []
 
 let buscarInput = document.getElementById("buscarInput")
 let buscarBoton = document.getElementById("buscarBoton")
-let card = documen.getElementsByClassName("card")
+let card = document.getElementsByClassName("card")
 
 
-function buscador(){
+// function buscador(){
     
-    buscarBoton.addEventListener("click",() =>{
-        let buscarCurso = arrayDeCursos.filter((buscarInput)=>
-        buscarInput.nombre.toLowerCase(),
-        )
-        buscarCurso.length == 0 ? alert("No hay coincidencias con los cursos buscados") : alert("En pantalla puede encontrar los cursos buscados")
-    })
+//     buscarBoton.addEventListener("click",() =>{
+//         let buscarCurso = arrayDeCursos.filter((buscarInput)=>
+//         buscarInput.nombre.toLowerCase(),
+//         )
+//         buscarCurso.length == 0 ? alert("No hay coincidencias con los cursos buscados") : alert("En pantalla puede encontrar los cursos buscados")
+//     })
+// }
+
+
+const filtrar = ()=>{
+    let texto = buscarInput.value.toLowerCase();
+    let filtro = arrayDeCursos.filter((curso)=> curso.nombre.toLowerCase() == texto)
+    if(filtro.length >= 0){
+        for (let cursosBuscados of filtro){
+            nuevosProductos.remove()
+            cursosBuscados.innerHTML = `<div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">${element.nombre}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">$ ${element.precio}</h6>
+              <p class="card-text">La duración del curso es de ${element.duracion}. <br> Tutor/a: ${element.nombreProfesor} ${element.apellido}</p>
+              <p class="card-text">Número de contacto: ${element.numero}. <br> Mail de contacto: ${element.mail} <br> Código de alta: ${element.codigo}</p>
+              <button id="btn${+element.id}" class="card-link">Agregar al carrito</button>
+            </div>
+            </div>`
+        }
+    }
+    else{ 
+        alert("Producto no encontrado")
+    }
 }
 
-
-
-
-
+buscarBoton.addEventListener("click", filtrar) //cuando se haga click me ejecuta esa funcion
 
 
 
