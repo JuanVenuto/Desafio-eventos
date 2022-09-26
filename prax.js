@@ -110,5 +110,29 @@ if(guardar != null){
 
 
 
+//BUSCADOR: la idea seria filtrar por el nombre 
+
+const busqueda = []
+
+let buscarInput = document.getElementById("buscarInput")
+let buscarBoton = document.getElementById("buscarBoton")
+let card = documen.getElementsByClassName("card")
+
+
+function buscador(){
+    
+    buscarBoton.addEventListener("click",() =>{
+        let buscarCurso = arrayDeCursos.filter((buscarInput)=>
+        buscarInput.nombre.toLowerCase(),
+        )
+        buscarCurso.length == 0 ? alert("No hay coincidencias con los cursos buscados") : alert("En pantalla puede encontrar los cursos buscados")
+    })
+}
+
+
+
+
+
+
 
 

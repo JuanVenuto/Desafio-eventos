@@ -493,4 +493,6 @@ footer{
 }
 
 
-
+.filtro{
+    display: none;
+}
