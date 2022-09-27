@@ -40,21 +40,28 @@ const arrayDeCursos = [curso1, curso2, curso3, curso4, curso5, curso6, curso7, c
 
 
 
-function crearProductos(array){
+function crearProductos(){
     let productos = document.getElementById("cursosDestacados")
     productos.innerHTML=""
     arrayDeCursos.forEach(element =>{
     let nuevosProductos = document.createElement("div")
     nuevosProductos.innerHTML = `<div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">${element.nombre}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">$ ${element.precio}</h6>
-      <p class="card-text">La duración del curso es de ${element.duracion}. <br> Tutor/a: ${element.nombreProfesor} ${element.apellido}</p>
-      <p class="card-text">Número de contacto: ${element.numero}. <br> Mail de contacto: ${element.mail} <br> Código de alta: ${element.codigo}</p>
-      <button id="btn${+element.id}" class="card-link">Agregar al carrito</button>
-    </div>
-    </div>`
+        <div class="card-body">
+        <h5 class="card-title">${element.nombre}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">$ ${element.precio}</h6>
+        <p class="card-text">La duración del curso es de ${element.duracion}. <br> Tutor/a: ${element.nombreProfesor} ${element.apellido}</p>
+        <p class="card-text">Número de contacto: ${element.numero}. <br> Mail de contacto: ${element.mail} <br> Código de alta: ${element.codigo}</p>
+        <button id="btn${element.id}" class="card-link">Agregar al carrito</button>
+        </div>
+        </div>`
     productos.appendChild(nuevosProductos)
+
+    let idProductos = document.getElementById(`btn${element.id}`)
+    idProductos.addEventListener("click", ()=>{
+        console.log(element)
+        alert("Producto agregado al carrito")
+        agregarAlCarrito(element)
+    })
     })
 }
 crearProductos()
@@ -84,17 +91,60 @@ function guardarInfoInput (){
 //CARRITO
 
 
-let carrito = document.getElementsByClassName("card-link") 
 const arrayDeCarrito = [] 
 
+function agregarAlCarrito(element){
+    arrayDeCarrito.push(element)
+}
 
-arrayDeCursos.forEach((e)=>{
-    let tester = document.getElementById(`btn${e.id}`)
-    tester.addEventListener("click", ()=>{
-        alert("Producto agregado al carrito")
-        arrayDeCarrito.push(e)
+
+let botonCarrito = document.getElementById("botonCarrito")
+let modalBody = document.getElementById("modalBody")
+let botonFinalizarCompra = document.getElementById("finalizarCompra")
+let precioTotal = document.getElementById("precioTotal")
+
+
+function productosCargadosEnCarrito (array){
+    modalBody.innerHTML= ""
+    array.forEach((producto)=>{
+        modalBody.innerHTML+=
+        `<div class="card border-primary mb-3" id ="producto${producto.id}" style="max-width: 540px;">
+        <div class="card-body">
+                <h4 class="card-title">${producto.nombre}</h4>
+            
+                <p class="card-text">Precio: $${producto.precio}</p> 
+                <p class="card-text">Duración: ${producto.duracion}</p>
+                <button class= "btn btn-danger" id="botonEliminar"><i class="fas fa-trash-alt"></i></button>
+        </div>    
+        </div>`
     })
+    sumarPrecioTotal(array)
+    
+   
+    let botonEliminar = document.getElementById("botonEliminar")
+    let div = document.getElementById(`producto${producto.id}`)
+    botonEliminar.addEventListener("click", ()=>{
+        div.remove()
+    })
+
+}
+
+botonCarrito.addEventListener("click", ()=>{
+    productosCargadosEnCarrito (arrayDeCarrito)
 })
+
+function sumarPrecioTotal(array){
+    let acumulador = 0
+    acumulador = array.reduce((acumulador,arrayDeCarrito)=>{
+        return acumulador + arrayDeCarrito.precio
+    },0)
+    if(acumulador === 0){
+        precioTotal.innerHTML = `<strong>No hay productos cargador en el carrito </strong>`
+    } else {
+        precioTotal.innerHTML = `El precio total es de ${acumulador} pesos`
+    }
+}
+
 
 
 
@@ -120,22 +170,17 @@ let card = document.getElementsByClassName("card")
 
 function buscador(){
     
-    buscarBoton.addEventListener("click",(e) =>{
-        e.preventDefault() 
+    buscarBoton.addEventListener("click",() =>{
         let query = buscarInput.value.toLowerCase()
         let buscarCurso = arrayDeCursos.filter((x)=>
-        nuevosProductos.hide(),
-        x.nombre.toLowerCase() === query,
+            x.nombre === query,
         )
-        crearProductos(buscarCurso)
-    })
-    
+        
+    })  
 }
 if(buscarBoton != null){
     buscador()
 }
-
-
 
 
 
