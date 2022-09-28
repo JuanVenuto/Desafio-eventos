@@ -166,6 +166,7 @@ ul{
     /*margin: auto;*/
     margin-left: 40px;
     flex-wrap: wrap;
+    margin-top: 200px;
 }
 .imagen-empresa{
     width: 80%;
@@ -198,20 +199,20 @@ ul{
     border: none;
     border-radius: 10px;
     padding: 15px 30px;
-    background-color: var(--buen-azul);
-    color: var(--color-blanco);
+    background-color: var(--otro-azul-o-gris);
+    color: var(--negro-distinto);
     z-index: 1;
 }
 .botonCurso:hover{
-    background-color: #49a4c5;
+    background-color: rgba(95, 103, 211, 0.555);
 }
 .botonCurso a{
     text-decoration: none;
-    color: var(--color-blanco);
+    color: var(--negro-distinto);
     font-weight: 600;
 }
 .botonCurso a:hover{
-    color: #fff;
+    color: #000000;
 }
 #headerCurso{
     background-image: url(./IMAGENES/nuevas/curso2.png),
@@ -234,7 +235,7 @@ ul{
     text-align: center;
 }
 
-/*Cartas*/
+/*Cartas INDEX*/
 
 .container-card{
     max-width: 75rem;
@@ -379,7 +380,14 @@ footer{
 
 /*CON JS*/
 
-
+#botonCarrito{
+    background-color: transparent ! important;
+    border: none;
+    margin-right: 20px;
+}
+#botonCarrito i{
+    color: #092327;
+}
 
 #cursosDestacados{
     display: flex;
@@ -393,14 +401,28 @@ footer{
 #cursosDestacados .card{
     width: 100%;
     max-height: 350px;
+    min-height: 350px;
     padding-bottom: 50px;
     top: 10px;
     transition: all 300ms;
     margin-bottom: 50px;
 }
 #cursosDestacados .card:hover{
-    background-color: rgba(241, 238, 238, 0.24);
+    background-color: rgba(206, 188, 188, 0.219);
     top: -10px;
+}
+#cursosDestacados .card-link{
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: none;
+    background-color: var(--otro-azul-o-gris);
+    color: var(--negro-distinto);
+    font-weight: 600;
+    margin-top: 4px;
+}
+#cursosDestacados .card-link:hover{
+    background-color: var(--otro-azul);
+    color: var(--color-blanco);
 }
 #buscarEmpresa{
     position: relative;
@@ -418,6 +440,33 @@ footer{
 
 #buscarEmpresa .btn:hover{
     color: var(--verde-oscuro);
+}
+
+#precioMenorA10{
+    color: red ;
+    font-weight: 700;
+}
+#precioMenorA10::after{
+    content: "PRECIOS ÚNICOS";
+    padding-left: 50px;
+    animation: animarPrecio infinite ease 3s;
+    transition: all 3s;
+    color: var(--otro-azul);
+}
+@keyframes animarPrecio {
+    0%{
+        letter-spacing: normal;
+    }
+    50%{
+        letter-spacing: 1px;
+    }
+    100%{
+        letter-spacing: normal;
+    }
+}
+#precioMayorA10{
+    color: #000000;
+    font-weight: 500;
 }
 
 /*FORM EMPRESAS*/
@@ -477,12 +526,14 @@ footer{
         padding: 0.625rem 1.25rem;
     }
 }
-@media (max-width: 48rem){
-    .boton .form-control{
-        display: none;
+@media (max-width: 1100px){
+    .boton{
+        display: flex;
+        flex-direction: column;
+        min-width: 50%;
     }
     .boton .btn{
-        display: none;
+        margin-top: 10px;
     }
     .carousel{
         display: none;

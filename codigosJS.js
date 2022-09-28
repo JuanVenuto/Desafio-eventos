@@ -34,21 +34,30 @@ curso6.aplicarComision()
 curso7.aplicarComision()
 curso8.aplicarComision()
 
-const arrayDeCursos = [curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8]
+let arrayDeCursos = []
+
+
+if(localStorage.getItem("arrayDeCursos")){
+    arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos"))
+}else{
+    arrayDeCursos.push(curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8)
+    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+}
+
+console.log(arrayDeCursos)
 
 
 
 
-
-function crearProductos(){
+function crearProductos(array){
     let productos = document.getElementById("cursosDestacados")
     productos.innerHTML=""
-    arrayDeCursos.forEach(element =>{
+    array.forEach(element =>{
     let nuevosProductos = document.createElement("div")
     nuevosProductos.innerHTML = `<div class="card" style="width: 18rem;">
         <div class="card-body">
         <h5 class="card-title">${element.nombre}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">$ ${element.precio}</h6>
+        <h6  id="${element.precio < 10000 ? "precioMenorA10" : "precioMayorA10"}">$ ${element.precio}</h6>
         <p class="card-text">La duración del curso es de ${element.duracion}. <br> Tutor/a: ${element.nombreProfesor} ${element.apellido}</p>
         <p class="card-text">Número de contacto: ${element.numero}. <br> Mail de contacto: ${element.mail} <br> Código de alta: ${element.codigo}</p>
         <button id="btn${element.id}" class="card-link">Agregar al carrito</button>
@@ -58,13 +67,18 @@ function crearProductos(){
 
     let idProductos = document.getElementById(`btn${element.id}`)
     idProductos.addEventListener("click", ()=>{
-        console.log(element)
-        alert("Producto agregado al carrito")
+        //alert("Producto agregado al carrito")
+        Swal.fire({
+            icon: 'success',
+            title: 'Tu curso fue agregado al Carrito',
+            showConfirmButton: false,
+            timer: 1800
+        })
         agregarAlCarrito(element)
     })
     })
 }
-crearProductos()
+crearProductos(arrayDeCursos)
 
 
 
@@ -82,16 +96,36 @@ function guardarInfoInput (){
     let infoIngresada = new Curso (inputCurso.value, inputPrecio.value, inputDuracion.value, inputNombre.value, inputApellido.value, inputNumero.value, inputMail.value, inputCodigo.value)
     infoIngresada.aplicarComision()
     arrayDeCursos.push(infoIngresada)
-    crearProductos()
+    crearProductos(arrayDeCursos)
+
+    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+    inputCurso.value=""
+    inputPrecio.value=""
+    inputDuracion.value=""
+    inputNombre.value=""
+    inputApellido.value=""
+    inputNumero.value=""
+    inputMail.value=""
+    inputCodigo.value=""
+    infoIngresada.value=""
 }
 
+//BOTON GUARDAR
 
+let guardar = document.getElementById("guardar") 
+
+if(guardar != null){
+    guardar.addEventListener("click", ()=>{
+        guardarInfoInput()
+    })
+}
 
 
 //CARRITO
 
 
-const arrayDeCarrito = [] 
+let arrayDeCarrito = [] 
+
 
 function agregarAlCarrito(element){
     arrayDeCarrito.push(element)
@@ -105,35 +139,39 @@ let precioTotal = document.getElementById("precioTotal")
 
 
 function productosCargadosEnCarrito (array){
-    modalBody.innerHTML= ""
+    modalBody.innerHTML=""
     array.forEach((producto)=>{
-        modalBody.innerHTML+=
-        `<div class="card border-primary mb-3" id ="producto${producto.id}" style="max-width: 540px;">
+        let productosEnCarrito = document.createElement("div")
+        productosEnCarrito.innerHTML =
+        `<div class="card border-primary mb-3" style="max-width: 540px;">
         <div class="card-body">
                 <h4 class="card-title">${producto.nombre}</h4>
-            
                 <p class="card-text">Precio: $${producto.precio}</p> 
                 <p class="card-text">Duración: ${producto.duracion}</p>
-                <button class= "btn btn-danger" id="botonEliminar"><i class="fas fa-trash-alt"></i></button>
+                <button class= "btn btn-danger" id="botonEliminar${producto.id}"><i class="fas fa-trash-alt"></i></button>
         </div>    
         </div>`
+    modalBody.appendChild(productosEnCarrito)
+
+    let botonEliminar = document.getElementById(`botonEliminar${producto.id}`)
+    botonEliminar.addEventListener("click", ()=>{
+        productosEnCarrito.remove()
+        arrayDeCarrito.splice(productosEnCarrito,1)
+        console.log(arrayDeCarrito)
+    })
     })
     sumarPrecioTotal(array)
-    
-   
-    let botonEliminar = document.getElementById("botonEliminar")
-    let div = document.getElementById(`producto${producto.id}`)
-    botonEliminar.addEventListener("click", ()=>{
-        div.remove()
-    })
-
 }
+
 
 botonCarrito.addEventListener("click", ()=>{
     productosCargadosEnCarrito (arrayDeCarrito)
 })
 
+
+
 function sumarPrecioTotal(array){
+    
     let acumulador = 0
     acumulador = array.reduce((acumulador,arrayDeCarrito)=>{
         return acumulador + arrayDeCarrito.precio
@@ -148,35 +186,28 @@ function sumarPrecioTotal(array){
 
 
 
-//BOTON GUARDAR
-
-let guardar = document.getElementById("guardar") 
-
-if(guardar != null){
-    guardar.addEventListener("click", ()=>{
-        guardarInfoInput()
-    })
-}
 
 
 
-//BUSCADOR: la idea seria filtrar por el nombre 
+
+//BUSCADOR
 
 
 let buscarInput = document.getElementById("buscarInput")
 let buscarBoton = document.getElementById("buscarBoton")
-let card = document.getElementsByClassName("card")
+
 
 
 function buscador(){
     
-    buscarBoton.addEventListener("click",() =>{
-        let query = buscarInput.value.toLowerCase()
-        let buscarCurso = arrayDeCursos.filter((x)=>
-            x.nombre === query,
+    buscarBoton.addEventListener("click",(e) =>{
+        let valorInput = buscarInput.value.toLowerCase()
+        let buscarCurso = arrayDeCursos.filter(()=>
+            e.nombre.toLowerCase() === valorInput
         )
-        
-    })  
+        console.log(buscarCurso)
+        crearProductos(buscarCurso)
+    })
 }
 if(buscarBoton != null){
     buscador()
