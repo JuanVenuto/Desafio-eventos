@@ -37,12 +37,9 @@ curso8.aplicarComision()
 let arrayDeCursos = []
 
 
-if(localStorage.getItem("arrayDeCursos")){
-    arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos"))
-}else{
-    arrayDeCursos.push(curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8)
-    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
-}
+localStorage.getItem("arrayDeCursos") = true ? arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) 
+: arrayDeCursos.push(curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8), localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+
 
 console.log(arrayDeCursos)
 
@@ -78,7 +75,7 @@ function crearProductos(array){
     })
     })
 }
-crearProductos(arrayDeCursos)
+crearProductos(...arrayDeCursos)
 
 
 
@@ -114,11 +111,7 @@ function guardarInfoInput (){
 
 let guardar = document.getElementById("guardar") 
 
-if(guardar != null){
-    guardar.addEventListener("click", ()=>{
-        guardarInfoInput()
-    })
-}
+guardar != null && guardar.addEventListener("click", ()=>{ guardarInfoInput() })
 
 
 //CARRITO
@@ -165,7 +158,7 @@ function productosCargadosEnCarrito (array){
 
 
 botonCarrito.addEventListener("click", ()=>{
-    productosCargadosEnCarrito (arrayDeCarrito)
+    productosCargadosEnCarrito (...arrayDeCarrito)
 })
 
 
@@ -176,11 +169,7 @@ function sumarPrecioTotal(array){
     acumulador = array.reduce((acumulador,arrayDeCarrito)=>{
         return acumulador + arrayDeCarrito.precio
     },0)
-    if(acumulador === 0){
-        precioTotal.innerHTML = `<strong>No hay productos cargador en el carrito </strong>`
-    } else {
-        precioTotal.innerHTML = `El precio total es de ${acumulador} pesos`
-    }
+    acumulador === 0 ? precioTotal.innerHTML = `<strong>No hay productos cargador en el carrito </strong>` : precioTotal.innerHTML = `El precio total es de ${acumulador} pesos`
 }
 
 
@@ -196,6 +185,7 @@ function sumarPrecioTotal(array){
 let buscarInput = document.getElementById("buscarInput")
 let buscarBoton = document.getElementById("buscarBoton")
 
+let {nombre} = Curso
 
 
 function buscador(){
@@ -209,9 +199,12 @@ function buscador(){
         crearProductos(buscarCurso)
     })
 }
-if(buscarBoton != null){
-    buscador()
-}
+
+buscarBoton != null && buscador()
 
 
 
+//Console para saber cuantos cursos hay y cuantos hay en carrito:
+
+let cursosTotalYenCarrito = [...arrayDeCursos, ...arrayDeCarrito]
+console.log(cursosTotalYenCarrito)
