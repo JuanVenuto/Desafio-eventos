@@ -87,7 +87,7 @@ h2{
     position: absolute;
     top: 0;
     left: 0;
-    background: linear-gradient(90deg, #092327, var(--color-blanco)); 
+    background: linear-gradient(90deg, #092327, var(--gris-claro)); 
     opacity: 0.5;
 }
 
@@ -471,47 +471,32 @@ footer{
 
 /*FORM EMPRESAS*/
 
-#inputEmpresas{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    flex-direction: column;
+#hola{
+    transition: all 1s;
 }
-#inputEmpresas input{
-    max-width: 500px;
-    margin: auto;
+#hola:hover{
+    border: #000000 solid 2px;
+    padding: 5px 15px;
+    border-radius: 10px;
 }
-#inputEmpresas div label{
-    font-weight: 600;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+.inputEmpresass{
+    margin-left: 500px;
+    margin-right: 500px;
+}
+.inputEmpresass div{
+    margin-top: 15px;
+}
+.inputEmpresass label{
     color: #0F3460;
-    padding-left: 20px;
+    font-weight: 600;
+    font-size: larger;
+    margin-top: 10px;
 }
-.form-label{
-    text-align: center;
-}
-#inputEmpresas div{
-    padding-bottom: 20px;
-    padding-top: 20px;
-}
-#precioGlobal{
-    display: flex;
-    flex-direction: column;
-}
-#precio2{
-    display: flex;
-    flex-direction: row;
-}
-#nombre2{
-    display: flex;
-    flex-direction: row;
-}
-#contacto2{
-    display: flex;
-    flex-direction: row;
-}
+
 #botones{
     margin: auto;
+    padding-top: 15px;
 }
 
 /*HACER TODO RESPONSIVE CON MEDIA QUERIES*/

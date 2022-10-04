@@ -37,8 +37,8 @@ curso8.aplicarComision()
 let arrayDeCursos = []
 
 
-localStorage.getItem("arrayDeCursos") = true ? arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) 
-: arrayDeCursos.push(curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8), localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+
+localStorage.getItem("arrayDeCursos") ? arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) : arrayDeCursos.push(curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8), localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
 
 
 console.log(arrayDeCursos)
@@ -64,7 +64,6 @@ function crearProductos(array){
 
     let idProductos = document.getElementById(`btn${element.id}`)
     idProductos.addEventListener("click", ()=>{
-        //alert("Producto agregado al carrito")
         Swal.fire({
             icon: 'success',
             title: 'Tu curso fue agregado al Carrito',
@@ -75,7 +74,7 @@ function crearProductos(array){
     })
     })
 }
-crearProductos(...arrayDeCursos)
+crearProductos(arrayDeCursos)
 
 
 
@@ -111,7 +110,20 @@ function guardarInfoInput (){
 
 let guardar = document.getElementById("guardar") 
 
-guardar != null && guardar.addEventListener("click", ()=>{ guardarInfoInput() })
+
+if (guardar != null) {
+    guardar.addEventListener("click", ()=>{ 
+        guardarInfoInput() 
+        Swal.fire({
+            icon: 'success',
+            title: '¡ Felicitaciones !',
+            text: 'Ya puede encontrar su curso en la plataforma',
+            showConfirmButton: false,
+            timer: 4000,
+            footer: '<a href="#tituloCurso">Buscar mi curso</a>'
+        })
+    })
+}
 
 
 //CARRITO
@@ -151,6 +163,14 @@ function productosCargadosEnCarrito (array){
         productosEnCarrito.remove()
         arrayDeCarrito.splice(productosEnCarrito,1)
         console.log(arrayDeCarrito)
+        Toastify({
+            text: "Su producto fue eliminado del carrito",
+            className: "info",
+            style: {
+              background: "linear-gradient(to right, #00416A, #1C2E4C)", 
+              color: "#fff"
+            }
+          }).showToast();
     })
     })
     sumarPrecioTotal(array)
@@ -158,7 +178,7 @@ function productosCargadosEnCarrito (array){
 
 
 botonCarrito.addEventListener("click", ()=>{
-    productosCargadosEnCarrito (...arrayDeCarrito)
+    productosCargadosEnCarrito (arrayDeCarrito)
 })
 
 
@@ -200,9 +220,10 @@ function buscador(){
     })
 }
 
-buscarBoton != null && buscador()
 
-
+if(buscarBoton != null){
+    buscador()
+}
 
 //Console para saber cuantos cursos hay y cuantos hay en carrito:
 
