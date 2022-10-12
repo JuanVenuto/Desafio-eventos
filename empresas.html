@@ -19,36 +19,39 @@
 
   <body>
     <header id="headerEmpresa">
-        <nav class="navbar navbar-expand-lg">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="./index.html"><img src="./IMAGENES/nuevas/f0ddec76cda8ee2756e663924856f81e.png" class="logoHeader"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="./index.html">Inicio</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./cursos.html">Cursos</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./empresas.html">Portal para empresas</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Contacto</a>
-                </li>
-                <li>
-                  <!-- Button trigger modal -->
-                  <button type="button" id="botonCarrito" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fas fa-shopping-cart fa-1x"></i>
-                  </button>
-                </li>
-              </ul>
+        
+      <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="./index.html"><img src="./IMAGENES/nuevas/f0ddec76cda8ee2756e663924856f81e.png" class="logoHeader"></a>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="./cursos.html">Cursos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="empresas.html">Portal de empresas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="modal" data-bs-target="#modalContacto">Contacto</a>
+              </li>
+            </ul>
+            <div class="botonesSesion">
+              <button type="button" class="btn btn-secondary btn-xl" id="botonCrear">Crear cuenta</button>
+              <button type="button" class="btn btn-primary btn-xl" id="botonIniciar">Iniciar sesión</button>
+            </div>
+            <div class="botonCarrito">
+              <!-- Button trigger modal -->
+              <button type="button" id="botonCarrito" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fas fa-shopping-cart fa-1x"></i>
+              </button>
             </div>
           </div>
-        </nav>
+        </div>
+      </nav>
+
         <div class="container-empresa">
           <div class="pasos-empresa">
             <h2 style="margin-bottom: 60px;">¿Querés ofrecer tus servicios de enseñanza?</h2>
@@ -61,7 +64,7 @@
               <li>Empezar a brindar tus servicios !!</li>
             </ol>
             <strong><p style="margin-bottom: 40px; margin-top: 20px;">Si ya realizaste los pasos previos, ya podés completar el formulario...</p></strong>
-            <button class="botonEmpresa"><a href="#inputEmpresass">Completar formulario</a></button>
+            <button class="botonEmpresa"><a href="#hola">Completar formulario</a></button>
           </div>
           <div class="foto-empresa">
             <img src="./IMAGENES/profePNG.png" alt="Imagen de un profesor" class="imagen-empresa">
@@ -99,6 +102,11 @@
         <input type="number" class="form-control" id="inputNumero" placeholder="Teléfono de contacto" aria-label="Username">
         <input type="text" class="form-control" id="inputMail" placeholder="Mail de contacto" aria-label="Server">
       </div>
+
+      <!-- <div class="mb-3">
+        <label for="formFile" class="form-label">Default file input example</label>
+        <input class="form-control" type="file" name="fileupload" id="formFile">
+      </div> -->
       
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon3">Código de acceso</span>
@@ -115,8 +123,8 @@
     <section class="containerDivs">
       <h2 style="padding-top: 150px; text-align: center; color:#000000;" id="tituloCurso">Tu curso debe figurar aquí</h2>
       <form class="boton d-flex" role="search" id="buscarEmpresa">
-        <input class="form-control me-2" type="search" placeholder="Encontrá tu curso" aria-label="Search">
-        <button class="btn btn-outline-success bg-light" type="submit">Buscar</button>
+        <input class="form-control me-2" type="search" placeholder="Encontrá tu curso" aria-label="Search" id="buscarInput">
+        <button class="btn btn-outline-success bg-light" type="submit" id="buscarBoton">Buscar</button>
       </form>
       <div id="cursosDestacados"></div>
     </section>
@@ -143,6 +151,70 @@
       </div>
     </div>
 
+    <!--Modal Contacto-->
+    <div class="modal" tabindex="-1" id="modalContacto" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Completa el formulario</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" id="inputNombre" placeholder="Nombre" aria-label="Username">
+              <input type="text" class="form-control" id="inputApellido" placeholder="Apellido" aria-label="Server">
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Email</label>
+              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Ej. juanrevez@gmail.com">
+            </div>
+        
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Motivo de tu consulta</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Resetear</button>
+            <button type="button" class="btn btn-primary">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal Terminos y condiciones-->
+    <div class="modal fade" id="modalTerminos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTerminoLabel">Términos y condiciones</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="modalBody">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam, quo totam. Laborum numquam dicta velit maiores placeat officia? Facere velit quam est ea. Magnam obcaecati amet accusantium, velit soluta quod.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--Modal Prguntas Frecuentes-->
+    <div class="modal fade" id="modalPreguntas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalPreguntasLabel">Preguntas frecuentes</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="modalBody">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam, quo totam. Laborum numquam dicta velit maiores placeat officia? Facere velit quam est ea. Magnam obcaecati amet accusantium, velit soluta quod.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <footer>
         <div class="container-footer">
           <div class="box_footer">
@@ -156,9 +228,8 @@
 
           <div class="box_footer">
             <h2>Soluciones</h2>
-            <a href="#">Preguntas frecuentes</a>
-            <a href="#">Términos y condiciones</a>
-            <a href="#">Consultar presupuesto</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#modalPreguntas">Preguntas frecuentes</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#modalTerminos">Términos y condiciones</a>
           </div>
 
           <div class="box_footer">

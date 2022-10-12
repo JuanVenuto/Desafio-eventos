@@ -38,31 +38,7 @@ h2{
     width: 3.125rem;
     height: 2.5rem;
 }
-.navbar{
-    background-color: #11131b00;
-}
-.navbar .container-fluid .collapse .navbar-nav .nav-item a{ /*para las letras*/
-    color: black; 
-    font-weight: 600;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    letter-spacing: 0.0625rem;
-    transition: all 1s;
-}
-.header .collapse {
-    position: absolute;
-    right: 0;
-}
-#headerEmpresa .collapse {
-    position: absolute;
-    right: 0;
-}
 
-.header .collapse .navbar-nav .nav-item a:hover{
-    border-bottom: solid #0F3460 1px;
-}
-#headerEmpresa .collapse .navbar-nav .nav-item a:hover{
-    border-bottom: solid #0F3460 1px;
-}
 #headerEmpresa{
     display: flex;
     flex-direction: column;
@@ -94,30 +70,16 @@ h2{
 ul{
     list-style-type: none; /*saca los puntos*/
 }
-.flex-menu{
-    display: flex;
-    flex-direction: row;
-    width: 40%;
-    position: absolute;
-    right: 0;
-    background-color: #092327;
-}
 
-.menu li a{
-    text-decoration: none;
-    color: var(--color-blanco);
-    font-weight: 400;
-    letter-spacing: 0.125rem;
-    display: flex;
-    justify-content: center;
-    padding-top: 0.3125rem;
+.navbar{
+    background-color: transparent ! important;
 }
-.menu li a:hover{
-    background-color: var(--color-blanco);
-    border: solid #092327 0.0625rem;
-    color: #092327;
+.navbar .container-fluid li a{
+    color: white;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    border: none;
 }
-
 
 .titulos{
     line-height: 350%;
@@ -166,7 +128,7 @@ ul{
     /*margin: auto;*/
     margin-left: 40px;
     flex-wrap: wrap;
-    margin-top: 200px;
+    margin: auto;
 }
 .imagen-empresa{
     width: 80%;
@@ -199,21 +161,21 @@ ul{
     border: none;
     border-radius: 10px;
     padding: 15px 30px;
-    background-color: var(--otro-azul-o-gris);
-    color: var(--negro-distinto);
+    background-color: var(--otro-azul);
     z-index: 1;
 }
 .botonCurso:hover{
-    background-color: rgba(95, 103, 211, 0.555);
+    background-color: var(--azul-oscuro);
 }
 .botonCurso a{
     text-decoration: none;
-    color: var(--negro-distinto);
+    color: var(--color-blanco);
     font-weight: 600;
 }
 .botonCurso a:hover{
-    color: #000000;
+    color: var(--color-blanco);
 }
+
 #headerCurso{
     background-image: url(./IMAGENES/nuevas/curso2.png),
     url(./IMAGENES/nuevas/curso.jpg);
@@ -383,7 +345,8 @@ footer{
 #botonCarrito{
     background-color: transparent ! important;
     border: none;
-    margin-right: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 #botonCarrito i{
     color: #092327;
@@ -408,7 +371,7 @@ footer{
     margin-bottom: 50px;
 }
 #cursosDestacados .card:hover{
-    background-color: rgba(206, 188, 188, 0.219);
+    background-color: rgba(0, 217, 255, 0.089);
     top: -10px;
 }
 #cursosDestacados .card-link{
@@ -471,18 +434,10 @@ footer{
 
 /*FORM EMPRESAS*/
 
-#hola{
-    transition: all 1s;
-}
-#hola:hover{
-    border: #000000 solid 2px;
-    padding: 5px 15px;
-    border-radius: 10px;
-}
 
 .inputEmpresass{
-    margin-left: 500px;
-    margin-right: 500px;
+    margin-left: 300px;
+    margin-right: 300px;
 }
 .inputEmpresass div{
     margin-top: 15px;
@@ -501,16 +456,7 @@ footer{
 
 /*HACER TODO RESPONSIVE CON MEDIA QUERIES*/
 
-@media (max-width: 62.5625rem){
-    header .collapse{
-        position: relative;
-    }
-    .navbar .container-fluid .collapse .navbar-nav .nav-item a{
-        border: none;
-        border-radius: 0;
-        padding: 0.625rem 1.25rem;
-    }
-}
+
 @media (max-width: 1100px){
     .boton{
         display: flex;
@@ -519,12 +465,6 @@ footer{
     }
     .boton .btn{
         margin-top: 10px;
-    }
-    .carousel{
-        display: none;
-    }
-    #carouselExampleDark{
-        display: none;
     }
 }
 

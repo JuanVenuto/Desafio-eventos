@@ -1,0 +1,123 @@
+[
+    {
+        "nombre": "Marketing",
+        "precio": 7000,
+        "duracion": "3 semanas",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 1
+    },
+    {
+        "nombre": "Ingles",
+        "precio": 8000,
+        "duracion": "4 semanas",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 2
+    },
+    {
+        "nombre": "Community Manager",
+        "precio": 6000,
+        "duracion": "2 semanas",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 3
+    },
+    {
+        "nombre": "Frances",
+        "precio": 10000,
+        "duracion": "2 meses",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 4
+    },
+    {
+        "nombre": "Diseño gráfico",
+        "precio": 15000,
+        "duracion": "3 meses",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 5
+    },
+    {
+        "nombre": "Fundamentos de la economía",
+        "precio": 6000,
+        "duracion": "2 semanas",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 6
+    },
+    {
+        "nombre": "Programación",
+        "precio": 20000,
+        "duracion": "4 meses",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 7
+    },
+    {
+        "nombre": "Literatura",
+        "precio": 8500,
+        "duracion": "2 meses",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 8
+    },
+    {
+        "nombre": "Lengua",
+        "precio": 8500,
+        "duracion": "2 meses",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 9
+    },
+    {
+        "nombre": "Sostenibilidad",
+        "precio": 11500,
+        "duracion": "2 meses",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 10
+    },
+    {
+        "nombre": "Turismo",
+        "precio": 21500,
+        "duracion": "5 meses",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 11
+    }
+]

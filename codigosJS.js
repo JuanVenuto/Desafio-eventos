@@ -6,7 +6,7 @@ function Curso (nombre, precio, duracion, nombreProfesor, apellido, numero, mail
     this.apellido = apellido,
     this.numero = parseInt(numero),
     this.mail = mail,
-    this.codigo = parseInt(codigo)
+    this.codigo = parseInt(codigo),
     this.id = id
     this.aplicarComision = function (){
         this.precio = (this.precio * 0.05) + this.precio
@@ -15,33 +15,21 @@ function Curso (nombre, precio, duracion, nombreProfesor, apellido, numero, mail
 
 
 
-const curso1 = new Curso ("Marketing", 7000, "3 semanas", "Cristian", "Gonzales", 2235602627, "judjkfndl@gmail.com", 45648, 1)
-const curso2 = new Curso ("Ingles", 8000, "4 semanas", "Cristian", "Gonzales", 2235602627, "judjkfndl@gmail.com", 45648, 2)
-const curso3 = new Curso ("Community Manager", 6000, "2 semanas", "Cristian", "Gonzales", 2235602627, "judjkfndl@gmail.com", 45648, 3)
-const curso4 = new Curso ("Frances", 10000, "2 meses", "Cristian", "Gonzales", 2235602627, "judjkfndl@gmail.com", 45648, 4)
-const curso5 = new Curso ("Diseño gráfico", 15000, "3 meses", "Cristian", "Gonzales", 2235602627, "judjkfndl@gmail.com", 45648, 5)
-const curso6 = new Curso ("Fundamentos de la economía", 6000, "2 semanas", "Cristian", "Gonzales", 2235602627, "judjkfndl@gmail.com", 45648, 6)
-const curso7 = new Curso ("Programación", 20000, "4 meses", "Cristian", "Gonzales", 2235602627, "judjkfndl@gmail.com", 45648, 7)
-const curso8 = new Curso ("Literatura", 7000, "2 meses", "Cristian", "Gonzales", 2235602627, "judjkfndl@gmail.com", 45648, 8)
-
-
-curso1.aplicarComision()
-curso2.aplicarComision()
-curso3.aplicarComision()
-curso4.aplicarComision()
-curso5.aplicarComision()
-curso6.aplicarComision()
-curso7.aplicarComision()
-curso8.aplicarComision()
-
 let arrayDeCursos = []
+
+
+//UTILIZACION DEL JSON Y FETCH
+
+const objetoCurso = async () =>{
+    const respuesta = await fetch ("cursos.json")
+    const cursos = await respuesta.json()
+    cursos.aplicarComision()
+}
+objetoCurso()
 
 
 
 localStorage.getItem("arrayDeCursos") ? arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) : arrayDeCursos.push(curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8), localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
-
-
-console.log(arrayDeCursos)
 
 
 
@@ -51,15 +39,25 @@ function crearProductos(array){
     productos.innerHTML=""
     array.forEach(element =>{
     let nuevosProductos = document.createElement("div")
-    nuevosProductos.innerHTML = `<div class="card" style="width: 18rem;">
-        <div class="card-body">
-        <h5 class="card-title">${element.nombre}</h5>
-        <h6  id="${element.precio < 10000 ? "precioMenorA10" : "precioMayorA10"}">$ ${element.precio}</h6>
-        <p class="card-text">La duración del curso es de ${element.duracion}. <br> Tutor/a: ${element.nombreProfesor} ${element.apellido}</p>
-        <p class="card-text">Número de contacto: ${element.numero}. <br> Mail de contacto: ${element.mail} <br> Código de alta: ${element.codigo}</p>
-        <button id="btn${element.id}" class="card-link">Agregar al carrito</button>
-        </div>
-        </div>`
+    nuevosProductos.innerHTML = `<div class="card text-center" style="width: 18rem;">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="true" >Curso</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Plan de estudio</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+    <h5 class="card-title"> ${element.nombre}</h5>
+    <h6  id="${element.precio < 10000 ? "precioMenorA10" : "precioMayorA10"}">$ ${element.precio}</h6>
+    <p class="card-text"><i class="fa-solid fa-calendar-days"></i> Duración: ${element.duracion}. <br> Tutor/a: ${element.nombreProfesor} ${element.apellido}</p>
+    <p class="card-text"><i class="fa-solid fa-phone"></i>  ${element.numero}. <br> <i class="fa-solid fa-envelope"></i> ${element.mail} <br> Código de alta: ${element.codigo}</p>
+    <button id="btn${element.id}" class="card-link">Agregar al carrito</button>
+    </div>
+    </div>`
     productos.appendChild(nuevosProductos)
 
     let idProductos = document.getElementById(`btn${element.id}`)
@@ -162,7 +160,7 @@ function productosCargadosEnCarrito (array){
     botonEliminar.addEventListener("click", ()=>{
         productosEnCarrito.remove()
         arrayDeCarrito.splice(productosEnCarrito,1)
-        console.log(arrayDeCarrito)
+        sumarPrecioTotal(array)
         Toastify({
             text: "Su producto fue eliminado del carrito",
             className: "info",
@@ -189,13 +187,8 @@ function sumarPrecioTotal(array){
     acumulador = array.reduce((acumulador,arrayDeCarrito)=>{
         return acumulador + arrayDeCarrito.precio
     },0)
-    acumulador === 0 ? precioTotal.innerHTML = `<strong>No hay productos cargador en el carrito </strong>` : precioTotal.innerHTML = `El precio total es de ${acumulador} pesos`
+    acumulador === 0 ? precioTotal.innerHTML = `No hay productos cargador en el carrito` : precioTotal.innerHTML = `El precio total es de ${acumulador} pesos`
 }
-
-
-
-
-
 
 
 
@@ -211,9 +204,10 @@ let {nombre} = Curso
 function buscador(){
     
     buscarBoton.addEventListener("click",(e) =>{
+        e.preventDefault()
         let valorInput = buscarInput.value.toLowerCase()
-        let buscarCurso = arrayDeCursos.filter(()=>
-            e.nombre.toLowerCase() === valorInput
+        let buscarCurso = arrayDeCursos.filter((x)=>
+            x.nombre.toLowerCase() === valorInput
         )
         console.log(buscarCurso)
         crearProductos(buscarCurso)
