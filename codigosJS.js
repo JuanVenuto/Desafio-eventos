@@ -18,18 +18,8 @@ function Curso (nombre, precio, duracion, nombreProfesor, apellido, numero, mail
 let arrayDeCursos = []
 
 
-//UTILIZACION DEL JSON Y FETCH
 
-const objetoCurso = async () =>{
-    const respuesta = await fetch ("cursos.json")
-    const cursos = await respuesta.json()
-    cursos.aplicarComision()
-}
-objetoCurso()
-
-
-
-localStorage.getItem("arrayDeCursos") ? arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) : arrayDeCursos.push(curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8), localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+// localStorage.getItem("arrayDeCursos") ? arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) : localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
 
 
 
@@ -92,7 +82,7 @@ function guardarInfoInput (){
     arrayDeCursos.push(infoIngresada)
     crearProductos(arrayDeCursos)
 
-    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+    localStorage.setItem("infoInput", JSON.stringify(arrayDeCursos))
     inputCurso.value=""
     inputPrecio.value=""
     inputDuracion.value=""
@@ -223,3 +213,17 @@ if(buscarBoton != null){
 
 let cursosTotalYenCarrito = [...arrayDeCursos, ...arrayDeCarrito]
 console.log(cursosTotalYenCarrito)
+
+//UTILIZACION DEL JSON Y FETCH
+
+const objetoCurso = async () =>{
+    const respuesta = await fetch ("cursos.json")
+    const cursos = await respuesta.json()
+    crearProductos(cursos)
+    for(let curso of cursos){
+        let cursoNew = new Curso (curso.nombre, curso.precio, curso.duracion, curso.nombreProfesor, curso.apellido, curso.numero, curso.mail, curso.codigo, curso.id)
+        arrayDeCursos.push(cursoNew)
+    }
+    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+}
+objetoCurso()
