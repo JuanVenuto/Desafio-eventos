@@ -14,12 +14,11 @@ function Curso (nombre, precio, duracion, nombreProfesor, apellido, numero, mail
 }
 
 
-
 let arrayDeCursos = []
 
 
 
-// localStorage.getItem("arrayDeCursos") ? arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) : localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+localStorage.getItem("arrayDeCursos") ? arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) : localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
 
 
 
@@ -49,7 +48,7 @@ function crearProductos(array){
     </div>
     </div>`
     productos.appendChild(nuevosProductos)
-
+    
     let idProductos = document.getElementById(`btn${element.id}`)
     idProductos.addEventListener("click", ()=>{
         Swal.fire({
@@ -82,7 +81,7 @@ function guardarInfoInput (){
     arrayDeCursos.push(infoIngresada)
     crearProductos(arrayDeCursos)
 
-    localStorage.setItem("infoInput", JSON.stringify(arrayDeCursos))
+    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
     inputCurso.value=""
     inputPrecio.value=""
     inputDuracion.value=""
@@ -209,10 +208,6 @@ if(buscarBoton != null){
     buscador()
 }
 
-//Console para saber cuantos cursos hay y cuantos hay en carrito:
-
-let cursosTotalYenCarrito = [...arrayDeCursos, ...arrayDeCarrito]
-console.log(cursosTotalYenCarrito)
 
 //UTILIZACION DEL JSON Y FETCH
 
@@ -220,10 +215,14 @@ const objetoCurso = async () =>{
     const respuesta = await fetch ("cursos.json")
     const cursos = await respuesta.json()
     crearProductos(cursos)
+    // comision(cursos)
+    
     for(let curso of cursos){
         let cursoNew = new Curso (curso.nombre, curso.precio, curso.duracion, curso.nombreProfesor, curso.apellido, curso.numero, curso.mail, curso.codigo, curso.id)
         arrayDeCursos.push(cursoNew)
     }
-    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+    // localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
 }
 objetoCurso()
+
+
