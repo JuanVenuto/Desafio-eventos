@@ -13,14 +13,14 @@ function Curso (nombre, precio, duracion, nombreProfesor, apellido, numero, mail
     }
 }
 
+//funcion para aplicar comision
+function comision (objeto){
+    let {precio} = Curso
+    return precio = (precio * 0.05) + precio,
+    console.log(objeto)
+}
 
 let arrayDeCursos = []
-
-
-
-localStorage.getItem("arrayDeCursos") ? arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) : localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
-
-
 
 
 function crearProductos(array){
@@ -187,7 +187,7 @@ function sumarPrecioTotal(array){
 let buscarInput = document.getElementById("buscarInput")
 let buscarBoton = document.getElementById("buscarBoton")
 
-let {nombre} = Curso
+
 
 
 function buscador(){
@@ -215,14 +215,21 @@ const objetoCurso = async () =>{
     const respuesta = await fetch ("cursos.json")
     const cursos = await respuesta.json()
     crearProductos(cursos)
-    // comision(cursos)
     
     for(let curso of cursos){
-        let cursoNew = new Curso (curso.nombre, curso.precio, curso.duracion, curso.nombreProfesor, curso.apellido, curso.numero, curso.mail, curso.codigo, curso.id)
+        let cursoNew = new Curso (curso.nombre, curso.precio , curso.duracion, curso.nombreProfesor, curso.apellido, curso.numero, curso.mail, curso.codigo, curso.id)
         arrayDeCursos.push(cursoNew)
     }
-    // localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
 }
 objetoCurso()
 
 
+if(localStorage.getItem("arrayDeCursos")){
+    arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos"))
+}
+else{
+    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+}
+
+console.log(arrayDeCursos)
