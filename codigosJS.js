@@ -9,18 +9,37 @@ function Curso (nombre, precio, duracion, nombreProfesor, apellido, numero, mail
     this.codigo = parseInt(codigo),
     this.id = id
     this.aplicarComision = function (){
-        this.precio = (this.precio * 0.05) + this.precio
+        this.precio = this.precio * 1.05
     }
 }
 
-//funcion para aplicar comision
-function comision (objeto){
-    let {precio} = Curso
-    return precio = (precio * 0.05) + precio,
-    console.log(objeto)
-}
+
 
 let arrayDeCursos = []
+
+//UTILIZACION DEL JSON Y FETCH
+
+
+if(localStorage.getItem("arrayDeCursos")){
+    arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos"))
+}
+else{
+    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+}
+
+const objetoCurso = async () =>{
+    const respuesta = await fetch ("cursos.json")
+    let cursos = await respuesta.json()
+    
+    crearProductos(cursos)
+    arrayDeCursos.push(cursos)
+    console.log(arrayDeCursos)
+    
+
+    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+}
+objetoCurso()
+
 
 
 function crearProductos(array){
@@ -209,27 +228,47 @@ if(buscarBoton != null){
 }
 
 
-//UTILIZACION DEL JSON Y FETCH
+//FORM DE CONTACTO
 
-const objetoCurso = async () =>{
-    const respuesta = await fetch ("cursos.json")
-    const cursos = await respuesta.json()
-    crearProductos(cursos)
+let modalContacto = document.getElementById("modalContacto")
+let enviarContacto = document.getElementById("enviarContacto")
+let arrayDeContacto = []
+function Contacto (nombre, apellido, email, consulta){
+    this.nombre = nombre,
+    this.apellido = apellido,
+    this.email = email,
+    this.consulta = consulta
+}
+
+enviarContacto.addEventListener("click", ()=>{
     
-    for(let curso of cursos){
-        let cursoNew = new Curso (curso.nombre, curso.precio , curso.duracion, curso.nombreProfesor, curso.apellido, curso.numero, curso.mail, curso.codigo, curso.id)
-        arrayDeCursos.push(cursoNew)
-    }
-    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
-}
-objetoCurso()
+    let nombreCon = document.getElementById("nombreCon")
+    let apellidoCon = document.getElementById("apellidoCon")
+    let exampleFormControlInput1 = document.getElementById("exampleFormControlInput1")
+    let exampleFormControlTextarea1 = document.getElementById("exampleFormControlTextarea1")
+    let infoContacto = new Contacto (nombreCon.value, apellidoCon.value, exampleFormControlInput1.value, exampleFormControlTextarea1.value)
+    arrayDeContacto.push(infoContacto)
+    console.log(arrayDeContacto)
+
+    nombreCon.value = ""
+    apellidoCon.value = ""
+    exampleFormControlInput1.value = ""
+    exampleFormControlTextarea1.value = ""
+
+    modalContacto.remove()
+    
+    Toastify({
+        text: "No te olvides de revisar tu email",
+        className: "info",
+        style: {
+          background: "linear-gradient(to right, #00416A, #1C2E4C)", 
+          color: "#fff"
+        }
+      }).showToast();
+    
+})
 
 
-if(localStorage.getItem("arrayDeCursos")){
-    arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos"))
-}
-else{
-    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
-}
 
-console.log(arrayDeCursos)
+
+
