@@ -119,5 +119,49 @@
         "mail": "judjkfndl@gmail.com",
         "codigo": 4851858,
         "id": 11
+    },
+    {
+        "nombre": "Contabilidad",
+        "precio": 21500,
+        "duracion": "3 meses",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 12
+    },
+    {
+        "nombre": "Administración estrategica",
+        "precio": 31500,
+        "duracion": "5 meses",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 13
+    },
+    {
+        "nombre": "Clases particulares de Ingles",
+        "precio": 11500,
+        "duracion": "3 meses",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 14
+    },
+    {
+        "nombre": "Matematica particular",
+        "precio": 41500,
+        "duracion": "6 meses",
+        "nombreProfesor": "Cristian",
+        "apellido": "Gonzales",
+        "numero": 2235602627,
+        "mail": "judjkfndl@gmail.com",
+        "codigo": 4851858,
+        "id": 15
     }
 ]
