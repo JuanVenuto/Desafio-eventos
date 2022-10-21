@@ -19,28 +19,24 @@ let arrayDeCursos = []
 
 //UTILIZACION DEL JSON Y FETCH
 
-
-if(localStorage.getItem("arrayDeCursos")){
-    arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos"))
-}
-else{
-    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
-}
-
-const objetoCurso = async () =>{
+const objetoCurso = async ()=>{
     const respuesta = await fetch ("cursos.json")
     let cursos = await respuesta.json()
-    
-    crearProductos(cursos)
-    arrayDeCursos.push(cursos)
-    console.log(arrayDeCursos)
-    
 
+    arrayDeCursos = cursos //para que en el crear productos me cree los del json
+    crearProductos(arrayDeCursos)
     localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+}
+
+if(localStorage.getItem("arrayDeCursos") === null){ //analiza la memoria del storage, si no existe ejecutame:
+    objetoCurso() //me ejecuta esto y me lo setea por primera vez
+} else{ //si ya existe, ejecuta esto:
+    arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) //traemelo en formato json y alamcenalo aca
+    crearProductos(arrayDeCursos) //creamelos en el DOM
 }
 objetoCurso()
 
-
+//CREAR PRODUCTOS
 
 function crearProductos(array){
     let productos = document.getElementById("cursosDestacados")
@@ -163,12 +159,14 @@ function productosCargadosEnCarrito (array){
         </div>    
         </div>`
     modalBody.appendChild(productosEnCarrito)
+    sumarPrecioTotal(arrayDeCarrito)
 
     let botonEliminar = document.getElementById(`botonEliminar${producto.id}`)
     botonEliminar.addEventListener("click", ()=>{
         productosEnCarrito.remove()
         arrayDeCarrito.splice(productosEnCarrito,1)
-        sumarPrecioTotal(array)
+        sumarPrecioTotal(arrayDeCarrito) //es para que se sobreescriba
+
         Toastify({
             text: "Su producto fue eliminado del carrito",
             className: "info",
@@ -176,10 +174,9 @@ function productosCargadosEnCarrito (array){
               background: "linear-gradient(to right, #00416A, #1C2E4C)", 
               color: "#fff"
             }
-          }).showToast();
+          }).showToast(); 
     })
     })
-    sumarPrecioTotal(array)
 }
 
 
@@ -190,12 +187,13 @@ botonCarrito.addEventListener("click", ()=>{
 
 
 function sumarPrecioTotal(array){
-    
+
     let acumulador = 0
     acumulador = array.reduce((acumulador,arrayDeCarrito)=>{
         return acumulador + arrayDeCarrito.precio
     },0)
     acumulador === 0 ? precioTotal.innerHTML = `No hay productos cargador en el carrito` : precioTotal.innerHTML = `El precio total es de ${acumulador} pesos`
+
 }
 
 
@@ -240,33 +238,42 @@ function Contacto (nombre, apellido, email, consulta){
     this.consulta = consulta
 }
 
-enviarContacto.addEventListener("click", ()=>{
+function contacto(){
     
-    let nombreCon = document.getElementById("nombreCon")
-    let apellidoCon = document.getElementById("apellidoCon")
-    let exampleFormControlInput1 = document.getElementById("exampleFormControlInput1")
-    let exampleFormControlTextarea1 = document.getElementById("exampleFormControlTextarea1")
-    let infoContacto = new Contacto (nombreCon.value, apellidoCon.value, exampleFormControlInput1.value, exampleFormControlTextarea1.value)
-    arrayDeContacto.push(infoContacto)
+    enviarContacto.addEventListener("click", ()=>{
+    
+        let nombreCon = document.getElementById("nombreCon")
+        let apellidoCon = document.getElementById("apellidoCon")
+        let exampleFormControlInput1 = document.getElementById("exampleFormControlInput1")
+        let exampleFormControlTextarea1 = document.getElementById("exampleFormControlTextarea1")
+        let infoContacto = new Contacto (nombreCon.value, apellidoCon.value, exampleFormControlInput1.value, exampleFormControlTextarea1.value)
+        arrayDeContacto.push(infoContacto)
+    
+        modalContacto.remove()
+        
+        Toastify({
+            text: "No te olvides de revisar tu email",
+            className: "info",
+            timer: 2500,
+            style: {
+              background: "linear-gradient(to right, #00416A, #1C2E4C)", 
+              color: "#fff"
+            }
+          }).showToast();
+    
+          localStorage.setItem("arrayDeContacto", JSON.stringify(arrayDeContacto))
+    })
+}
+contacto()
+
+
+if(localStorage.getItem("arrayDeContacto") === null){
+    contacto()
     console.log(arrayDeContacto)
-
-    nombreCon.value = ""
-    apellidoCon.value = ""
-    exampleFormControlInput1.value = ""
-    exampleFormControlTextarea1.value = ""
-
-    modalContacto.remove()
-    
-    Toastify({
-        text: "No te olvides de revisar tu email",
-        className: "info",
-        style: {
-          background: "linear-gradient(to right, #00416A, #1C2E4C)", 
-          color: "#fff"
-        }
-      }).showToast();
-    
-})
+} else{
+    arrayDeContacto = JSON.parse(localStorage.getItem("arrayDeContacto"))
+    console.log(arrayDeContacto)
+}
 
 
 
