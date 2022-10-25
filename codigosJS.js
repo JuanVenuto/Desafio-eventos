@@ -34,7 +34,7 @@ if(localStorage.getItem("arrayDeCursos") === null){ //analiza la memoria del sto
     arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) //traemelo en formato json y alamcenalo aca
     crearProductos(arrayDeCursos) //creamelos en el DOM
 }
-objetoCurso()
+
 
 //CREAR PRODUCTOS
 
