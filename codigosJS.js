@@ -34,7 +34,7 @@ if(localStorage.getItem("arrayDeCursos") === null){ //analiza la memoria del sto
     arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) //traemelo en formato json y alamcenalo aca
     crearProductos(arrayDeCursos) //creamelos en el DOM
 }
-
+// objetoCurso()
 
 //CREAR PRODUCTOS
 
@@ -73,6 +73,7 @@ function crearProductos(array){
             timer: 1800
         })
         agregarAlCarrito(element)
+        localStorage.setItem("arrayDeCarrito", JSON.stringify(arrayDeCarrito))
     })
     })
 }
@@ -137,6 +138,11 @@ let arrayDeCarrito = []
 function agregarAlCarrito(element){
     arrayDeCarrito.push(element)
 }
+if(localStorage.getItem("arrayDeCarrito") === null){
+    localStorage.setItem("arrayDeCarrito", JSON.stringify(arrayDeCarrito))
+} else{
+    arrayDeCarrito = JSON.parse(localStorage.getItem("arrayDeCarrito"))
+}
 
 
 let botonCarrito = document.getElementById("botonCarrito")
@@ -165,6 +171,7 @@ function productosCargadosEnCarrito (array){
     botonEliminar.addEventListener("click", ()=>{
         productosEnCarrito.remove()
         arrayDeCarrito.splice(productosEnCarrito,1)
+        localStorage.setItem("arrayDeCarrito", JSON.stringify(arrayDeCarrito))
         sumarPrecioTotal(arrayDeCarrito) //es para que se sobreescriba
 
         Toastify({
@@ -196,7 +203,46 @@ function sumarPrecioTotal(array){
 
 }
 
+//FINALIZAR COMPRA
 
+let compraFinal = document.getElementById("finalizarCompra")
+compraFinal.addEventListener("click", ()=>{finalizarCompra()})
+
+function finalizarCompra(){
+    Swal.fire({
+        title: '¿Estás seguro de realizar la compra?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, estoy seguro',
+        cancelButtonText: 'No, no quiero',
+        confirmButtonColor: 'green',
+        cancelButtonColor: 'red',
+    }).then((resultado)=>{
+        if(resultado.isConfirmed){
+            Swal.fire({
+            title: 'Compra realizada',
+            icon: 'success',
+            confirmButtonColor: 'green',
+            text: `Muchas gracias por su inscripción.`,
+            })
+        
+            arrayDeCarrito =[]
+            localStorage.removeItem("arrayDeCarrito")
+            
+        }else{
+            Swal.fire({
+                title: 'Compra no realizada',
+                icon: 'info',
+                text: `La compra no ha sido realizada! Sus productos siguen en el carrito.`,
+                confirmButtonColor: 'green',
+                timer:2500
+            })
+        }
+    })
+}
+
+
+// console.log(finalizarCompra())
 
 //BUSCADOR
 
