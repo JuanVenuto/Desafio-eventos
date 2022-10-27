@@ -23,18 +23,18 @@ const objetoCurso = async ()=>{
     const respuesta = await fetch ("cursos.json")
     let cursos = await respuesta.json()
 
-    arrayDeCursos = cursos //para que en el crear productos me cree los del json
+    arrayDeCursos = cursos 
     crearProductos(arrayDeCursos)
     localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
 }
 
-if(localStorage.getItem("arrayDeCursos") === null){ //analiza la memoria del storage, si no existe ejecutame:
-    objetoCurso() //me ejecuta esto y me lo setea por primera vez
-} else{ //si ya existe, ejecuta esto:
-    arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) //traemelo en formato json y alamcenalo aca
-    crearProductos(arrayDeCursos) //creamelos en el DOM
+if(localStorage.getItem("arrayDeCursos") === null){ 
+    objetoCurso() 
+} else{ 
+    arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) 
+    crearProductos(arrayDeCursos) 
 }
-// objetoCurso()
+
 
 //CREAR PRODUCTOS
 
@@ -138,6 +138,7 @@ let arrayDeCarrito = []
 function agregarAlCarrito(element){
     arrayDeCarrito.push(element)
 }
+
 if(localStorage.getItem("arrayDeCarrito") === null){
     localStorage.setItem("arrayDeCarrito", JSON.stringify(arrayDeCarrito))
 } else{
@@ -147,14 +148,13 @@ if(localStorage.getItem("arrayDeCarrito") === null){
 
 let botonCarrito = document.getElementById("botonCarrito")
 let modalBody = document.getElementById("modalBody")
-let botonFinalizarCompra = document.getElementById("finalizarCompra")
 let precioTotal = document.getElementById("precioTotal")
 
 
 function productosCargadosEnCarrito (array){
     modalBody.innerHTML=""
     array.forEach((producto)=>{
-        let productosEnCarrito = document.createElement("div")
+        productosEnCarrito = document.createElement("div")
         productosEnCarrito.innerHTML =
         `<div class="card border-primary mb-3" style="max-width: 540px;">
         <div class="card-body">
@@ -172,7 +172,7 @@ function productosCargadosEnCarrito (array){
         productosEnCarrito.remove()
         arrayDeCarrito.splice(productosEnCarrito,1)
         localStorage.setItem("arrayDeCarrito", JSON.stringify(arrayDeCarrito))
-        sumarPrecioTotal(arrayDeCarrito) //es para que se sobreescriba
+        sumarPrecioTotal(arrayDeCarrito) 
 
         Toastify({
             text: "Su producto fue eliminado del carrito",
@@ -219,16 +219,19 @@ function finalizarCompra(){
         cancelButtonColor: 'red',
     }).then((resultado)=>{
         if(resultado.isConfirmed){
+            
+            arrayDeCarrito =[]
+            localStorage.removeItem("arrayDeCarrito")
+            modalBody.remove()
+            sumarPrecioTotal(arrayDeCarrito)
+            
+            
             Swal.fire({
             title: 'Compra realizada',
             icon: 'success',
             confirmButtonColor: 'green',
             text: `Muchas gracias por su inscripción.`,
-            })
-        
-            arrayDeCarrito =[]
-            localStorage.removeItem("arrayDeCarrito")
-            
+            })        
         }else{
             Swal.fire({
                 title: 'Compra no realizada',
@@ -242,7 +245,7 @@ function finalizarCompra(){
 }
 
 
-// console.log(finalizarCompra())
+
 
 //BUSCADOR
 
@@ -320,6 +323,7 @@ if(localStorage.getItem("arrayDeContacto") === null){
     arrayDeContacto = JSON.parse(localStorage.getItem("arrayDeContacto"))
     console.log(arrayDeContacto)
 }
+
 
 
 
