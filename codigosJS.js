@@ -1,3 +1,5 @@
+//CLASES
+
 function Curso (nombre, precio, duracion, nombreProfesor, apellido, numero, mail, codigo, id){
     this.nombre = nombre,
     this.precio = parseInt(precio),
@@ -13,30 +15,39 @@ function Curso (nombre, precio, duracion, nombreProfesor, apellido, numero, mail
     }
 }
 
+function Contacto (nombre, apellido, email, consulta){
+    this.nombre = nombre,
+    this.apellido = apellido,
+    this.email = email,
+    this.consulta = consulta
+}
 
+
+//VARIABLES
 
 let arrayDeCursos = []
+let arrayDeCarrito = [] 
+let arrayDeContacto = []
 
-//UTILIZACION DEL JSON Y FETCH
+let guardar = document.getElementById("guardar") 
 
-const objetoCurso = async ()=>{
-    const respuesta = await fetch ("cursos.json")
-    let cursos = await respuesta.json()
+let botonCarrito = document.getElementById("botonCarrito")
+let modalBody = document.getElementById("modalBody")
+let precioTotal = document.getElementById("precioTotal")
 
-    arrayDeCursos = cursos 
-    crearProductos(arrayDeCursos)
-    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
-}
+let compraFinal = document.getElementById("finalizarCompra")
 
-if(localStorage.getItem("arrayDeCursos") === null){ 
-    objetoCurso() 
-} else{ 
-    arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) 
-    crearProductos(arrayDeCursos) 
-}
+let buscarInput = document.getElementById("buscarInput")
+let buscarBoton = document.getElementById("buscarBoton")
+
+let modalContacto = document.getElementById("modalContacto")
+let enviarContacto = document.getElementById("enviarContacto")
 
 
-//CREAR PRODUCTOS
+//FUNCIONES:
+
+
+//Crear productos
 
 function crearProductos(array){
     let productos = document.getElementById("cursosDestacados")
@@ -81,7 +92,7 @@ crearProductos(arrayDeCursos)
 
 
 
-//FORMULARIO empresas
+//Formulario de empresas
 
 function guardarInfoInput (){ 
     let inputCurso = document.getElementById("inputCurso")
@@ -109,11 +120,6 @@ function guardarInfoInput (){
     infoIngresada.value=""
 }
 
-//BOTON GUARDAR
-
-let guardar = document.getElementById("guardar") 
-
-
 if (guardar != null) {
     guardar.addEventListener("click", ()=>{ 
         guardarInfoInput() 
@@ -129,10 +135,7 @@ if (guardar != null) {
 }
 
 
-//CARRITO
-
-
-let arrayDeCarrito = [] 
+//Carrito:
 
 
 function agregarAlCarrito(element){
@@ -146,9 +149,6 @@ if(localStorage.getItem("arrayDeCarrito") === null){
 }
 
 
-let botonCarrito = document.getElementById("botonCarrito")
-let modalBody = document.getElementById("modalBody")
-let precioTotal = document.getElementById("precioTotal")
 
 
 function productosCargadosEnCarrito (array){
@@ -197,10 +197,6 @@ function sumarPrecioTotal(array){
 
 }
 
-//FINALIZAR COMPRA
-
-let compraFinal = document.getElementById("finalizarCompra")
-compraFinal.addEventListener("click", ()=>{finalizarCompra()})
 
 function finalizarCompra(){
     Swal.fire({
@@ -238,16 +234,10 @@ function finalizarCompra(){
     })
 }
 
+compraFinal.addEventListener("click", ()=>{finalizarCompra()})
 
 
-
-//BUSCADOR
-
-
-let buscarInput = document.getElementById("buscarInput")
-let buscarBoton = document.getElementById("buscarBoton")
-
-
+//Buscador:
 
 
 function buscador(){
@@ -269,17 +259,8 @@ if(buscarBoton != null){
 }
 
 
-//FORM DE CONTACTO
+//Formulario de contacto:
 
-let modalContacto = document.getElementById("modalContacto")
-let enviarContacto = document.getElementById("enviarContacto")
-let arrayDeContacto = []
-function Contacto (nombre, apellido, email, consulta){
-    this.nombre = nombre,
-    this.apellido = apellido,
-    this.email = email,
-    this.consulta = consulta
-}
 
 function contacto(){
     
@@ -318,6 +299,24 @@ if(localStorage.getItem("arrayDeContacto") === null){
     console.log(arrayDeContacto)
 }
 
+
+//UTILIZACION DEL JSON Y FETCH
+
+const objetoCurso = async ()=>{
+    const respuesta = await fetch ("cursos.json")
+    let cursos = await respuesta.json()
+
+    arrayDeCursos = cursos 
+    crearProductos(arrayDeCursos)
+    localStorage.setItem("arrayDeCursos", JSON.stringify(arrayDeCursos))
+}
+
+if(localStorage.getItem("arrayDeCursos") === null){ 
+    objetoCurso() 
+} else{ 
+    arrayDeCursos = JSON.parse(localStorage.getItem("arrayDeCursos")) 
+    crearProductos(arrayDeCursos) 
+}
 
 
 
