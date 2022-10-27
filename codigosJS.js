@@ -156,7 +156,7 @@ function productosCargadosEnCarrito (array){
     array.forEach((producto)=>{
         productosEnCarrito = document.createElement("div")
         productosEnCarrito.innerHTML =
-        `<div class="card border-primary mb-3" style="max-width: 540px;">
+        `<div class="card border-primary mb-3" id="productoCarrito${producto.id}" style="max-width: 540px;">
         <div class="card-body">
                 <h4 class="card-title">${producto.nombre}</h4>
                 <p class="card-text">Precio: $${producto.precio}</p> 
@@ -166,23 +166,17 @@ function productosCargadosEnCarrito (array){
         </div>`
     modalBody.appendChild(productosEnCarrito)
     sumarPrecioTotal(arrayDeCarrito)
-
-    let botonEliminar = document.getElementById(`botonEliminar${producto.id}`)
-    botonEliminar.addEventListener("click", ()=>{
-        productosEnCarrito.remove()
-        arrayDeCarrito.splice(productosEnCarrito,1)
-        localStorage.setItem("arrayDeCarrito", JSON.stringify(arrayDeCarrito))
-        sumarPrecioTotal(arrayDeCarrito) 
-
-        Toastify({
-            text: "Su producto fue eliminado del carrito",
-            className: "info",
-            style: {
-              background: "linear-gradient(to right, #00416A, #1C2E4C)", 
-              color: "#fff"
-            }
-          }).showToast(); 
     })
+    
+    array.forEach((producto, indice)=>{
+        let botonEliminar = document.getElementById(`botonEliminar${producto.id}`)
+        botonEliminar.addEventListener("click", ()=>{
+            array.splice(indice,1)
+            localStorage.setItem("arrayDeCarrito", JSON.stringify(arrayDeCarrito))
+            let cardCarrito = document.getElementById(`productoCarrito${producto.id}`)
+            cardCarrito.remove()
+            sumarPrecioTotal(arrayDeCarrito) 
+        })
     })
 }
 
@@ -220,10 +214,10 @@ function finalizarCompra(){
     }).then((resultado)=>{
         if(resultado.isConfirmed){
             
-            arrayDeCarrito =[]
+            arrayDeCarrito = []
             localStorage.removeItem("arrayDeCarrito")
-            modalBody.remove()
             sumarPrecioTotal(arrayDeCarrito)
+            productosCargadosEnCarrito()
             
             
             Swal.fire({
